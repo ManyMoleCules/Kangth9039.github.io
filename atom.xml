@@ -2,14 +2,21 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Kangth9039.github.io</id>
     <title>HhF的博客</title>
-    <updated>2021-02-21T01:57:59.987Z</updated>
+    <updated>2021-02-21T02:06:43.068Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Kangth9039.github.io"/>
     <link rel="self" href="https://Kangth9039.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
+    <subtitle>HhF的小站</subtitle>
     <logo>https://Kangth9039.github.io/images/avatar.png</logo>
     <icon>https://Kangth9039.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, HhF的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[P1001]]></title>
+        <id>https://Kangth9039.github.io/post/p1001/</id>
+        <link href="https://Kangth9039.github.io/post/p1001/">
+        </link>
+        <updated>2021-02-21T02:01:39.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[test]]></title>
         <id>https://Kangth9039.github.io/post/test/</id>
