@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>P1001 | HhF的博客</title>
+<title>C++のCYaRon | HhF的博客</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -24,13 +24,13 @@
 
 
 
-    <meta name="description" content="#include &lt;iostream&gt;
-using namespace std;
-int main(){
-    int a, b;
-    cin &gt;&gt; a &gt;&gt; b; // input
-    cou..." />
-    <meta name="keywords" content="solution" />
+    <meta name="description" content="相信许多和我一样用win8的朋友们都很懊恼，
+  为什么下载不了IDLE???
+
+在这里，希望您能抽出4~5分钟的时间来学习一下怎样用dev-c++制作完美的数据。
+我们先打开dev,Ctrl+n创建文件，然后键入以下代码：
+#includ..." />
+    <meta name="keywords" content="" />
   </head>
   <body>
     <div id="app" class="main">
@@ -105,30 +105,80 @@ int main(){
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">P1001</h2>
-            <div class="post-date">2021.02.21</div>
+            <h2 class="post-title">C++のCYaRon</h2>
+            <div class="post-date">2021.02.22</div>
             
             <div class="post-content" v-pre>
-              <pre><code class="language-cpp">#include &lt;iostream&gt;
+              <p>相信许多和我一样用win8的朋友们都很懊恼，</p>
+<pre><code>  为什么下载不了IDLE???
+</code></pre>
+<p>在这里，希望您能抽出4~5分钟的时间来学习一下怎样用dev-c++制作完美的数据。</p>
+<p>我们先打开dev,Ctrl+n创建文件，然后键入以下代码：</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 int main(){
-    int a, b;
-    cin &gt;&gt; a &gt;&gt; b; // input
-    cout &lt;&lt; a + b &lt;&lt; endl; // output
+    ofstream fout;
+    string fname, f1, f2;
+    long long A, B;
+    srand(time(NULL));
+    for (int i = 0; i &lt; 10; i++){
+        cout &lt;&lt; &quot;name = &quot;;
+        cin &gt;&gt; fname;
+        A = rand() % 1000000000 + 1;
+        B = rand() % 1000000000 + 1;
+        fout.open((fname + &quot;.in&quot;).c_str());
+        fout &lt;&lt; A &lt;&lt; &quot; &quot; &lt;&lt; B &lt;&lt; endl;
+        fout.close();
+        fout.open((fname + &quot;.out&quot;).c_str());
+        fout &lt;&lt; A + B &lt;&lt; endl;
+        fout.close();
+    }
     return 0;
-} // DONE!
+}
 </code></pre>
+<p>然后按F11运行，键入10个文件名。</p>
+<p>一定保存到桌面！</p>
+<p>接下来回到洛谷界面，新建题目，输入 A+B题面，之后回到题目-&gt;编辑题目-&gt;数据点，在桌面上传您刚刚配置的数据。</p>
+<p>最后回到题目，输入 A+B的代码，即可完成数据点配置喽！</p>
+<h2 id="谢谢大家qwq">谢谢大家QwQ</h2>
+<p>诶别走啊，还有福利呐</p>
+<p>模板：</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+int main(){
+    ofstream fout;
+    string fname;
+    /*您的变量*/;
+    srand(time(NULL));
+    for (int i = 0; i &lt; /*您需要的数据组数*/; i++){
+        cin &gt;&gt; fname; // file name
+        /*变量1*/ = rand() % /*范围*/ + 1;
+        // n个变量...
+        // 或者手动cin,scanf输入
+        fout.open((fname+&quot;.in&quot;).c_str());
+        fout &lt;&lt; /*变量*/ &lt;&lt; endl;
+        fout.close();
+        /*加工变量*/
+        fout.open((fname+&quot;.out&quot;).c_str());
+        fout &lt;&lt; /*output*/ &lt;&lt; endl;
+        fout.close();
+    }
+    return 0;
+}
+</code></pre>
+<h1 id="the-end">THE END</h1>
 
             </div>
             
-              <div class="tag-container">
-                
-                  <a href="https://Kangth9039.github.io/tag/solution/" class="tag">
-                    solution
-                  </a>
-                
-              </div>
             
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://Kangth9039.github.io/post/about/">
+                  <h3 class="post-title">
+                    关于
+                  </h3>
+                </a>
+              </div>
             
 
             
