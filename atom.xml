@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Kangth9039.github.io</id>
-    <title>HhF的博客</title>
-    <updated>2021-02-23T01:22:36.809Z</updated>
+    <title>HhF的博客小站</title>
+    <updated>2021-02-23T01:25:04.473Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Kangth9039.github.io"/>
     <link rel="self" href="https://Kangth9039.github.io/atom.xml"/>
-    <subtitle>HhF的小站</subtitle>
+    <subtitle>光阴似箭，一去不复返。岁月如梭，永记师情深。</subtitle>
     <logo>https://Kangth9039.github.io/images/avatar.png</logo>
     <icon>https://Kangth9039.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2021, HhF的博客</rights>
+    <rights>All rights reserved 2021, HhF的博客小站</rights>
     <entry>
         <title type="html"><![CDATA[搞笑代码10个-1]]></title>
         <id>https://Kangth9039.github.io/post/gao-xiao-dai-ma-10-ge-1/</id>
