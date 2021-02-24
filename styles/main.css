@@ -2062,13 +2062,7 @@ body {
         width: 960px;
         margin: 0 auto;
       }
-    @font-face {
-      font-family: 'Monaco.ttf';
-      src: url('/media/fonts/Monaco.ttf.ttf');
-    }
-    * {
-        font-family: 'Monaco.ttf';
-    }body {
+    body {
       color: #555;
     }
     .next-md-body {
