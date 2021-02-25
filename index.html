@@ -1,1396 +1,188 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
 <head>
-  <meta charset="UTF-8" />
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<meta name="keywords" content="Gridea静态个人博客">
-<meta name="description" content="ricuroow2333">
-<meta name="theme-color" content="#000">
-<title>HhF的博客小站</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1614221819409">
-<link rel="stylesheet" href="/media/css/pisces.css">
-<link rel="stylesheet" href="/media/fonts/font-awesome.css">
-<link
-  href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
-  rel="stylesheet" type="text/css">
-
-<link href="/media/hljs/styles/atom-one-dark.css"
-  rel="stylesheet">
-
-<link rel="stylesheet" href="/styles/main.css">
-
-<script src="/media/hljs/highlight.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
-  integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
-
-
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
-  integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
-  integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
-  onload="renderMathInElement(document.body);"></script>
-
-
-
-
-
+<meta charset="utf-8">
+<title>贪吃蛇小游戏</title>
+<style>
+#myCanvas {
+    box-shadow: 0 0 6px #000;
+}
+</style>
 </head>
-
 <body>
-  <div class="head-top-line"></div>
-  <div class="header-box">
-    
-<div class="pisces">
-  <header class="header  ">
-    <div class="blog-header box-shadow-wrapper bg-color " id="header">
-      <div class="nav-toggle" id="nav_toggle">
-        <div class="toggle-box">
-          <div class="line line-top"></div>
-          <div class="line line-center"></div>
-          <div class="line line-bottom"></div>
-        </div>
-      </div>
-      <div class="site-meta">       
-        <div class="site-title">
-          
-            <a href="/" class="brand">
-              <span>HhF的博客小站</span>
-            </a>  
-          
-        </div>
-        
-          <p class="subtitle">光阴似箭，岁月如梭。愿惜时，成就更好的AC。</p>
-        
-      </div>
-      <nav class="site-nav" id="site_nav">
-        <ul id="nav_ul">
-          
-            
-            
-              
-            
-            <li class="nav-item nav-item-active">
-              
-              
-                <a href="/" target="_self">
-                  <i class="fa fa-home"></i> 首页
-                </a>
-              
-            </li>
-          
-            
-            
-              
-            
-            <li class="nav-item ">
-              
-              
-                <a href="/archives/" target="_self">
-                  <i class="fa fa-archive"></i> 归档
-                </a>
-              
-            </li>
-          
-            
-            
-              
-            
-            <li class="nav-item ">
-              
-              
-                <a href="/tags/" target="_self">
-                  <i class="fa fa-tags"></i> 标签
-                </a>
-              
-            </li>
-          
-            
-            
-              
-            
-            <li class="nav-item ">
-              
-              
-                <a href="/post/about/" target="_self">
-                  <i class="fa fa-user"></i> 关于
-                </a>
-              
-            </li>
-          
-            
-            
-              
-            
-            <li class="nav-item ">
-              
-              
-                <a href="/game/" target="_self">
-                  <i class="fa fa-globe"></i> 游戏
-                </a>
-              
-            </li>
-          
-          
-            
-              <li class="nav-item ">
-                <a href="/friends/" target="_self">
-                  
-                    <i class="fa fa-address-book"></i> 友情链接
-                  
-                </a>
-              </li>
-            
-          
-          
-            <li id="fa_search" class="nav-item">
-              <a href="javascript:void(0);">
-                <i class="fa fa-search"></i> <span class="language" data-lan="search">搜索</span>
-              </a>
-            </li>
-          
-        </ul>
-      </nav>
-    </div>
-  </header>
-</div>
+<br/><br/><br/>
+<input type="button" value="开始游戏" onclick="beginGame();"><br/><br/><br/>
+<canvas id="myCanvas" width="450" height="450"></canvas>
 
-<script type="text/javascript"> 
- 
-  let showNav = true;
-
-  let navToggle = document.querySelector('#nav_toggle'),
-  siteNav = document.querySelector('#site_nav');
-  
-  function navClick() {
-    let sideBar = document.querySelector('.sidebar');
-    let navUl = document.querySelector('#nav_ul');
-    navToggle.classList.toggle('nav-toggle-active');
-    siteNav.classList.toggle('nav-menu-active');
-    if (siteNav.classList.contains('nav-menu-active')) {
-      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
-    } else {
-      siteNav.style = "";
-    }
-  }
-
-  navToggle.addEventListener('click',navClick);  
-</script>
-  </div>
-  <div class="main-continer">
-    
-    <div
-      class="section-layout pisces ">
-      <div class="section-layout-wrapper">
-        <div id="sidebarMeta" class="sidebar">
-    
-<div class="sidebar-wrapper box-shadow-wrapper bg-color">
-  <div class="sidebar-item">
-    <img class="site-author-image right-motion" src="/images/avatar.png"/>
-    <p class="site-author-name">HhF03</p>
-    
-    <div class="site-description right-motion">
-      
-        <p id="binft">我永远喜欢pjw</p>
-      
-    </div>
-    
-  </div>
-  <div class="sidebar-item side-item-stat right-motion">
-    <div class="sidebar-item-box">
-      <a href="/archives/">
-        
-        <span class="site-item-stat-count">5</span>
-        <span class="site-item-stat-name language" data-lan="article">文章</span>
-      </a>
-    </div>
-    <div class="sidebar-item-box">
-      <a href="">
-        <span class="site-item-stat-count">1</span>
-        <span class="site-item-stat-name language" data-lan="category">分类</span>
-      </a>
-    </div>
-    <div class="sidebar-item-box">
-      <a href="/tags/">
-        <span class="site-item-stat-count">1</span>
-        <span class="site-item-stat-name language" data-lan="tag">标签</span>
-      </a>
-    </div>
-  </div>
-  
-    
-      <div class="sidebar-item">
-        <span class="site-item-rss">
-            <i class="fa fa-rss"></i>
-            <a href="https://Kangth9039.github.io/atom.xml" target="_blank">RSS</a>
-        </span>
-      </div>
-    
-  
-  
-
-
-
-  <div style="width: 100%; position: relative;">
-    <canvas id="canvasDiyBlock" style="width:100%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
-    <script src="/media/js/magic/clock.js"></script>
-  </div>
-
-</div>
-</div>
 <script>
-  let sidebarMeta = document.querySelector('#sidebarMeta');
-  let scheme = 'pisces';
-  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
-  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
-    document.addEventListener('scroll', function(e) {
-      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
-        sidebarWrapper.classList.add('home-sidebar-fixed')
-      } else {
-        sidebarWrapper.classList.remove('home-sidebar-fixed')
-      }
-    });
-  }
-  </script>
-        <div class="section-box pisces">
-          <section class="section bg-color posts-expand slide-down-in">
-            
-  <article class="post-list-box  post box-shadow-wrapper">
-    <div class="article-wrapper bg-color">
-      <section class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://Kangth9039.github.io/post/lian-ji-dai-ma-zhoumy-ti-gong/">
-      联机代码-Zhoumy提供
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2021-02-25 10:53:49">2021.02.25</span>
-      <span class="post-meta-divider pc-show">|</span>
-    </span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>1<span class="language" data-lan="minute">分钟</span></span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>98<span class="pc-show language" data-lan="words">字数</span></span>
-    </span>
-    
-  </div>
-</section>
-      <div class="post-body">
-        
-        
-          
-            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
-            
-            
-              
-              
-              
-            
-              
-              
-              
-            
-              
-              
-              
-            
-            
-              <p><pre><code class="language-cpp">#include &lt;WINSOCK2.H&gt;   
-#include &lt;stdio.h&gt;   
-#define SERVER_ADDRESS &quot;127.0.0.1&quot;
-
-                
-                  <!-- 自动摘要出来的内容有<code则补上结尾,防止格式错误 -->
-                  </code></pre>
-                
-              <p>
-            
-          
-        
-        
-        <div class="post-button text-center">
-          <a class="btn language" data-lan="read-more" href="https://Kangth9039.github.io/post/lian-ji-dai-ma-zhoumy-ti-gong/" rel="contents">
-            阅读全文 »
-          </a>
-        </div>
-        
-      </div>
-      
-        <footer class="post-footer">
-          <div class="post-eof"></div>
-        </footer>
-      
-    </div>
-  </article>
-
-  <article class="post-list-box  post box-shadow-wrapper">
-    <div class="article-wrapper bg-color">
-      <section class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://Kangth9039.github.io/post/gao-xiao-dai-ma-10-ge-1/">
-      搞笑代码10个-1
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2021-02-23 09:08:10">2021.02.23</span>
-      <span class="post-meta-divider pc-show">|</span>
-    </span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>1<span class="language" data-lan="minute">分钟</span></span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>28<span class="pc-show language" data-lan="words">字数</span></span>
-    </span>
-    
-  </div>
-</section>
-      <div class="post-body">
-        
-        
-          
-            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
-            
-            
-              
-              
-              
-            
-              
-              
-              
-            
-              
-              
-              
-            
-            
-              <p><pre><code class="language-cpp">long long ago;
------------------------
-double kill;
-
-                
-                  <!-- 自动摘要出来的内容有<code则补上结尾,防止格式错误 -->
-                  </code></pre>
-                
-              <p>
-            
-          
-        
-        
-        <div class="post-button text-center">
-          <a class="btn language" data-lan="read-more" href="https://Kangth9039.github.io/post/gao-xiao-dai-ma-10-ge-1/" rel="contents">
-            阅读全文 »
-          </a>
-        </div>
-        
-      </div>
-      
-        <footer class="post-footer">
-          <div class="post-eof"></div>
-        </footer>
-      
-    </div>
-  </article>
-
-  <article class="post-list-box  post box-shadow-wrapper">
-    <div class="article-wrapper bg-color">
-      <section class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://Kangth9039.github.io/post/cnocyaron/">
-      C++のCYaRon
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2021-02-22 09:16:42">2021.02.22</span>
-      <span class="post-meta-divider pc-show">|</span>
-    </span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>2<span class="language" data-lan="minute">分钟</span></span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>379<span class="pc-show language" data-lan="words">字数</span></span>
-    </span>
-    
-  </div>
-</section>
-      <div class="post-body">
-        
-        
-          
-            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
-            
-            
-              
-              
-              
-            
-              
-              
-              
-            
-              
-              
-              
-            
-            
-              <p><p>相信许多和我一样用win8的朋友们都很懊恼，</p>
-<pre><code>  为什么下载不了IDLE???
-</code></pre>
-
-                
-                  <!-- 自动摘要出来的内容有<code则补上结尾,防止格式错误 -->
-                  </code></pre>
-                
-              <p>
-            
-          
-        
-        
-        <div class="post-button text-center">
-          <a class="btn language" data-lan="read-more" href="https://Kangth9039.github.io/post/cnocyaron/" rel="contents">
-            阅读全文 »
-          </a>
-        </div>
-        
-      </div>
-      
-        <footer class="post-footer">
-          <div class="post-eof"></div>
-        </footer>
-      
-    </div>
-  </article>
-
-  <article class="post-list-box  post box-shadow-wrapper">
-    <div class="article-wrapper bg-color">
-      <section class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://Kangth9039.github.io/post/about/">
-      关于
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2021-02-21 10:21:48">2021.02.21</span>
-      <span class="post-meta-divider pc-show">|</span>
-    </span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>2<span class="language" data-lan="minute">分钟</span></span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>404<span class="pc-show language" data-lan="words">字数</span></span>
-    </span>
-    
-  </div>
-</section>
-      <div class="post-body">
-        
-        
-          
-            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
-            
-            
-              
-              
-              
-            
-              
-              
-              
-            
-              
-              
-              
-            
-            
-              <p><blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-
-                
-              <p>
-            
-          
-        
-        
-        <div class="post-button text-center">
-          <a class="btn language" data-lan="read-more" href="https://Kangth9039.github.io/post/about/" rel="contents">
-            阅读全文 »
-          </a>
-        </div>
-        
-      </div>
-      
-        <footer class="post-footer">
-          <div class="post-eof"></div>
-        </footer>
-      
-    </div>
-  </article>
-
-  <article class="post-list-box  post box-shadow-wrapper">
-    <div class="article-wrapper bg-color">
-      <section class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://Kangth9039.github.io/post/p1001/">
-      P1001
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2021-02-21 10:01:39">2021.02.21</span>
-      <span class="post-meta-divider pc-show">|</span>
-    </span>
-    
-    <span class="meta-item">
-      <i class="fa fa-folder-o"></i>
-      <span class="pc-show language" data-lan="category-in">分类于</span>
-      
-      
-      <a href="https://Kangth9039.github.io/tag/solution/">
-        <span>solution</span>
-      </a>
-      
-      
-    </span>
-    <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>1<span class="language" data-lan="minute">分钟</span></span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>32<span class="pc-show language" data-lan="words">字数</span></span>
-    </span>
-    
-  </div>
-</section>
-      <div class="post-body">
-        
-        
-          
-            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
-            
-            
-              
-              
-              
-            
-              
-              
-              
-            
-              
-              
-              
-            
-            
-              <p><pre><code class="language-cpp">#include &lt;iostream&gt;
-using namespace std;
-int main(){
-
-                
-                  <!-- 自动摘要出来的内容有<code则补上结尾,防止格式错误 -->
-                  </code></pre>
-                
-              <p>
-            
-          
-        
-        
-        <div class="post-button text-center">
-          <a class="btn language" data-lan="read-more" href="https://Kangth9039.github.io/post/p1001/" rel="contents">
-            阅读全文 »
-          </a>
-        </div>
-        
-      </div>
-      
-        <footer class="post-footer">
-          <div class="post-eof"></div>
-        </footer>
-      
-    </div>
-  </article>
-  
-            
-            
-<div class="page bg-color">
-  <ul class="pagination-ul">
-    
-    
-      
-        <li class="pagination-li pagination-active">
-            <a href="/page/../">
-              1
-            </a>
-        </li>
-      
-    
-    
-  </ul>
-</div>
-          </section>
-        </div>
-      </div>
-    </div>
-    <div class="footer-box">
-  <footer class="footer">
-    <div class="copyright">
-      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | © 2019-2020 Theme By <a
-        href="https://github.com/hsxyhao/gridea-theme-next" target="_blank">HsxyHao</a>
-    </div>
-    <div class="poweredby">
-      此网站被人浏览了<img src="https://www.hit-counts.com/counter.php?t=MTQ0ODY5MQ==" width="135" height="20" />次
-    </div>
-  </footer>
-  
-  
-  <div class="pisces back-to-top" id="back_to_top">
-    <i class="fa fa-arrow-up"></i>
-    
-    <span class="scrollpercent">
-      <span id="back_to_top_text">0</span>%
-    </span>
-    
-  </div>
-  
-  
-  
-</div>
-<script>
-
-  let sideBarOpen = 'sidebar-open';
-  let body = document.body;
-  let back2Top = document.querySelector('#back_to_top'),
-    back2TopText = document.querySelector('#back_to_top_text'),
-    drawerBox = document.querySelector('#drawer_box'),
-    rightSideBar = document.querySelector('.sidebar'),
-    viewport = document.querySelector('body');
-
-  function scrollAnimation(currentY, targetY) {
-
-    let needScrollTop = targetY - currentY
-    let _currentY = currentY
-    setTimeout(() => {
-      const dist = Math.ceil(needScrollTop / 10)
-      _currentY += dist
-      window.scrollTo(_currentY, currentY)
-      if (needScrollTop > 10 || needScrollTop < -10) {
-        scrollAnimation(_currentY, targetY)
-      } else {
-        window.scrollTo(_currentY, targetY)
-      }
-    }, 1)
-  }
-
-  back2Top.addEventListener("click", function (e) {
-    scrollAnimation(document.scrollingElement.scrollTop, 0);
-    e.stopPropagation();
-    return false;
-  });
-
-  window.addEventListener('scroll', function (e) {
-    let percent = document.scrollingElement.scrollTop / (document.scrollingElement.scrollHeight - document.scrollingElement.clientHeight) * 100;
-    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
-      back2Top.classList.add('back-top-active');
-    }
-    if (percent == 0) {
-      back2Top.classList.remove('back-top-active');
-    }
-    if (back2TopText) {
-      back2TopText.textContent = Math.floor(percent);
-    }
-  });
-
-
-  let hasCacu = false;
-  window.onresize = function () {
-    calcuHeight();
-  }
-
-  function calcuHeight() {
-    // 动态调整站点概览高度
-    if (!hasCacu && back2Top.classList.contains('pisces') || back2Top.classList.contains('gemini')) {
-      let sideBar = document.querySelector('.sidebar');
-      let navUl = document.querySelector('#site_nav');
-      sideBar.style = 'margin-top:' + (navUl.offsetHeight + navUl.offsetTop + 15) + 'px;';
-      hasCacu = true;
-    }
-  }
-  calcuHeight();
-
-  let open = false, MOTION_TIME = 300, RIGHT_MOVE_DIS = '320px';
-
-  if (drawerBox) {
-    let rightMotions = document.querySelectorAll('.right-motion');
-    let right = drawerBox.classList.contains('right');
-
-    let transitionDir = right ? "transition.slideRightIn" : "transition.slideLeftIn";
-
-    let openProp, closeProp;
-    if (right) {
-      openProp = {
-        paddingRight: RIGHT_MOVE_DIS
-      };
-      closeProp = {
-        paddingRight: '0px'
-      };
-    } else {
-      openProp = {
-        paddingLeft: RIGHT_MOVE_DIS
-      };
-      closeProp = {
-        paddingLeft: '0px'
-      };
-    }
-
-    drawerBox.onclick = function () {
-      open = !open;
-      window.Velocity(rightSideBar, 'stop');
-      window.Velocity(viewport, 'stop');
-      window.Velocity(rightMotions, 'stop');
-      if (open) {
-        window.Velocity(rightSideBar, {
-          width: RIGHT_MOVE_DIS
-        }, {
-          duration: MOTION_TIME,
-          begin: function () {
-            window.Velocity(rightMotions, transitionDir, {});
-          }
-        })
-        window.Velocity(viewport, openProp, {
-          duration: MOTION_TIME
-        });
-      } else {
-        window.Velocity(rightSideBar, {
-          width: '0px'
-        }, {
-          duration: MOTION_TIME,
-          begin: function () {
-            window.Velocity(rightMotions, {
-              opacity: 0
-            });
-          }
-        })
-        window.Velocity(viewport, closeProp, {
-          duration: MOTION_TIME
-        });
-      }
-      for (let i = 0; i < drawerBox.children.length; i++) {
-        drawerBox.children[i].classList.toggle('muse-line');
-      }
-      drawerBox.classList.toggle(sideBarOpen);
-    }
-  }
-
-  // 链接跳转
-  let newWindow = 'true'
-  if (newWindow === 'true') {
-    let links = document.querySelectorAll('.post-body a')
-    links.forEach(item => {
-      if (!item.classList.contains('btn')) {
-        item.setAttribute("target", "_blank");
-      }
-    })
-  }
-
-  let faSearch = document.querySelector('#fa_search');
-  faSearch.addEventListener('click', function () {
-    document.querySelector('#search_mask').style = ''
-  })
-
-  // 代码高亮
-  hljs.initHighlightingOnLoad();
-  
-  // 离开当前页title变化
-  var leaveTitle = "不要离开我(；′⌒`)♥";
-  if (leaveTitle) {
-    document.addEventListener('visibilitychange', function () {
-      if (document.visibilityState == 'hidden') {
-        normal_title = document.title;
-        document.title = leaveTitle;
-      } else {
-        document.title = normal_title;
-      }
-    });
-  }
-
-</script>
-    <div class="light-box" id="light_box"></div>
-<script>
-  let imgs = document.querySelectorAll('.post-body img');
-  let lightBox = document.querySelector('#light_box');
-  lightBox.addEventListener('mousedown', (e) => {
-    e.preventDefault()
-  })
-  lightBox.addEventListener('mousewheel', (e) => {
-    e.preventDefault()
-  })
-  let width = window.innerWidth * 0.8;
-  lightBox.onclick = () => {
-    let img = lightBox.querySelector('img');
-    lightBox.style = '';
-    img && img.remove();
-  }
-  imgs.forEach(item => {
-    item.onclick = function (e) {
-      let lightImg = document.createElement('img');
-      lightImg.src = this.src;
-      lightBox.style = `height: 100%; opacity: 1; background-color: rgba(0, 0, 0, 0.5);cursor: zoom-out;`;
-      lightImg.style = `width: ${width}px;border-radius: 2px;`;
-      lightImg.onclick = function () {
-        lightBox.style = '';
-        this.remove();
-      }
-      lightBox.append(lightImg);
-    }
-  })
-</script>
-  </div>
-</body>
-
-<div class="search-mask" id="search_mask" style="display: none;">
-  <div class="search-box">
-    <div class="search-title">
-      <i class="fa fa-search"></i>
-      <div class="input-box">
-        <input id="search" type="text" class="language" data-lan="search" placeholder="搜索">
-      </div>
-      <i id="close" class="fa fa-times-circle"></i>
-    </div>
-    <div class="stat-box">
-      <span id="stat_count">0</span><span class="language" data-lan="stat">条相关条目，使用了</span><span id="stat_times">0</span><span class="language" data-lan="stat-time">毫秒</span>
-      <hr>
-    </div>
-    <div class="result" id="result">
-      
-      <div class="item">
-        <a class="result-title" style="opacity: 0;" href="https://Kangth9039.github.io/post/lian-ji-dai-ma-zhoumy-ti-gong/"" data-c="
-          &lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include &amp;lt;WINSOCK2.H&amp;gt;   
-#include &amp;lt;stdio.h&amp;gt;   
-#define SERVER_ADDRESS &amp;quot;127.0.0.1&amp;quot;
-#define PORT                     5150 
-#define MSGSIZE               1024
-#pragma comment(lib, &amp;quot;ws2_32.lib&amp;quot;)      
-int main(){      
-    WSADATA wsaData;  
-    SOCKET sClient;      
-    SOCKADDR_IN server;
-    char szMessage[MSGSIZE];  
-    int ret;    
-    WSAStartup(0x0202, &amp;amp;wsaData);
-    sClient = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    memset(&amp;amp;server, 0, sizeof(SOCKADDR_IN));
-    server.sin_family = PF_INET, server.sin_port = htons(PORT),server.sin_addr.s_addr = inet_addr(SERVER_ADDRESS); 
-    connect(sClient, (struct sockaddr *) &amp;amp;server, sizeof(SOCKADDR_IN));
-    while (true){      
-        printf(&amp;quot;Send:&amp;quot;);  
-        gets(szMessage); 
-        send(sClient, szMessage, strlen(szMessage), 0); 
-    } 
-    closesocket(sClient);      
-    WSACleanup();      
-    return 0;      
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+var w = 15; //格子宽、高
+var snaLen = 6; //初始长度
+var snake = []; //身体长度
+for (var i = 0; i < snaLen; i++) {
+    snake[i] = new cell(i, 0, 39);
 }
-&lt;/code&gt;&lt;/pre&gt;
-">联机代码-Zhoumy提供</a>
-      </div>
-      
-      <div class="item">
-        <a class="result-title" style="opacity: 0;" href="https://Kangth9039.github.io/post/gao-xiao-dai-ma-10-ge-1/"" data-c="
-          &lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;long long ago;
------------------------
-double kill;
------------------------
-#define true false
------------------------
-#define false true
------------------------
-xxx.isPig = true;
------------------------
-while (1) ;
------------------------
-do while (true);
------------------------
-Sleep(INT_MAX);
------------------------
-inline read(){ // 快读
-    // bla...
+var head = snake[snaLen - 1]; //头部
+//初始食物
+var foodx = Math.ceil(Math.random() * 28 + 1);
+var foody = Math.ceil(Math.random() * 28 + 1);
+var food = new Food(foodx, foody);
+//食物
+function Food(x, y) {
+    this.x = x;
+    this.y = y;
+    return this;
 }
------------------------
-int mian(){
 
+//身体
+function cell(x, y, d) {
+    this.x = x;
+    this.y = y;
+    this.d = d;
+    return this;
 }
-&lt;/code&gt;&lt;/pre&gt;
-">搞笑代码10个-1</a>
-      </div>
-      
-      <div class="item">
-        <a class="result-title" style="opacity: 0;" href="https://Kangth9039.github.io/post/cnocyaron/"" data-c="
-          &lt;p&gt;相信许多和我一样用win8的朋友们都很懊恼，&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;  为什么下载不了IDLE???
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;在这里，希望您能抽出4~5分钟的时间来学习一下怎样用dev-c++制作完美的数据。&lt;/p&gt;
-&lt;p&gt;我们先打开dev,Ctrl+n创建文件，然后键入以下代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-using namespace std;
-int main(){
-    ofstream fout;
-    string fname, f1, f2;
-    long long A, B;
-    srand(time(NULL));
-    for (int i = 0; i &amp;lt; 10; i++){
-        cout &amp;lt;&amp;lt; &amp;quot;name = &amp;quot;;
-        cin &amp;gt;&amp;gt; fname;
-        A = rand() % 1000000000 + 1;
-        B = rand() % 1000000000 + 1;
-        fout.open((fname + &amp;quot;.in&amp;quot;).c_str());
-        fout &amp;lt;&amp;lt; A &amp;lt;&amp;lt; &amp;quot; &amp;quot; &amp;lt;&amp;lt; B &amp;lt;&amp;lt; endl;
-        fout.close();
-        fout.open((fname + &amp;quot;.out&amp;quot;).c_str());
-        fout &amp;lt;&amp;lt; A + B &amp;lt;&amp;lt; endl;
-        fout.close();
-    }
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;然后按F11运行，键入10个文件名。&lt;/p&gt;
-&lt;p&gt;一定保存到桌面！&lt;/p&gt;
-&lt;p&gt;接下来回到洛谷界面，新建题目，输入 A+B题面，之后回到题目-&amp;gt;编辑题目-&amp;gt;数据点，在桌面上传您刚刚配置的数据。&lt;/p&gt;
-&lt;p&gt;最后回到题目，输入 A+B的代码，即可完成数据点配置喽！&lt;/p&gt;
-&lt;h2 id=&#34;谢谢大家qwq&#34;&gt;谢谢大家QwQ&lt;/h2&gt;
-&lt;p&gt;诶别走啊，还有福利呐&lt;/p&gt;
-&lt;p&gt;模板：&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-using namespace std;
-int main(){
-    ofstream fout;
-    string fname;
-    /*您的变量*/;
-    srand(time(NULL));
-    for (int i = 0; i &amp;lt; /*您需要的数据组数*/; i++){
-        cin &amp;gt;&amp;gt; fname; // file name
-        /*变量1*/ = rand() % /*范围*/ + 1;
-        // n个变量...
-        // 或者手动cin,scanf输入
-        fout.open((fname+&amp;quot;.in&amp;quot;).c_str());
-        fout &amp;lt;&amp;lt; /*变量*/ &amp;lt;&amp;lt; endl;
-        fout.close();
-        /*加工变量*/
-        fout.open((fname+&amp;quot;.out&amp;quot;).c_str());
-        fout &amp;lt;&amp;lt; /*output*/ &amp;lt;&amp;lt; endl;
-        fout.close();
-    }
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h1 id=&#34;the-end&#34;&gt;THE END&lt;/h1&gt;
-">C++のCYaRon</a>
-      </div>
-      
-      <div class="item">
-        <a class="result-title" style="opacity: 0;" href="https://Kangth9039.github.io/post/about/"" data-c="
-          &lt;blockquote&gt;
-&lt;p&gt;欢迎来到我的小站呀，很高兴遇见你！🤝&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;注：小游戏加载较慢，在等待的时候不要点“确定”鸭QwQ&lt;/p&gt;
-&lt;h2 id=&#34;关于本站&#34;&gt;🏠 关于本站&lt;/h2&gt;
-&lt;p&gt;这是HhF03在2021年2月21日建的站，专门发各种code&lt;/p&gt;
-&lt;h2 id=&#34;博主是谁&#34;&gt;👨‍💻 博主是谁&lt;/h2&gt;
-&lt;p&gt;HhF03,洛谷341353&lt;/p&gt;
-&lt;p&gt;来自北京，祖籍河北邢台，老家辽宁大连&lt;/p&gt;
-&lt;h2 id=&#34;兴趣爱好&#34;&gt;⛹ 兴趣爱好&lt;/h2&gt;
-&lt;p&gt;弹琴，coding，看书，搞比赛，写谔谷杂志&lt;/p&gt;
-&lt;h2 id=&#34;博主最爱的美食&#34;&gt;🍱博主最爱的美食&lt;/h2&gt;
-&lt;p&gt;山城辣子鸡（az，&lt;/p&gt;
-&lt;h2 id=&#34;联系我呀&#34;&gt;📬 联系我呀&lt;/h2&gt;
-&lt;p&gt;Lyttlekang@hotmail.com&lt;/p&gt;
-&lt;h2 id=&#34;️站长大事记你已经知道站长的星座了吧awa&#34;&gt;♊️站长大事记（你已经知道站长的星座了吧awa）&lt;/h2&gt;
-&lt;p&gt;2020.03.08 henry8008: hello luogu&lt;/p&gt;
-&lt;p&gt;2020.04.10 henry8008: hello 码农的狂欢&lt;/p&gt;
-&lt;p&gt;同日henry8008被禁言，但招来了 5个互关粉（ HsKr, Alwaysforward, ·monkey·,Robot_Shuchong（知名大佬一只书虫仔的小号（已废））还有海蓝时x见鲸（已废）&lt;/p&gt;
-&lt;p&gt;2020.04.13 HENRY8008被棕，与·monkey·绝交&lt;/p&gt;
-&lt;p&gt;2020.04.21 henry8008写421皇帝，想通了，与·monkey·和好&lt;/p&gt;
-&lt;p&gt;2020.04.26 在·monkey·的提议下注册了HhF03，并找到了xiaozengX&lt;/p&gt;
-&lt;p&gt;2020.04.28 henry8008恢复蓝，syscls(HfK123)诞生&lt;/p&gt;
-&lt;p&gt;2020.05.01 提交AT3861翻译没下文……&lt;/p&gt;
-&lt;p&gt;2020.05.06 大骂珂爱王子&lt;/p&gt;
-&lt;p&gt;2020.05.16 找到chengzhiyu蒻蒟，奆奆的蒟蒻&lt;/p&gt;
-&lt;p&gt;2020.05.21 《地下城探案》诞生，我生日&lt;/p&gt;
-&lt;p&gt;2020.05.25 henry8008被jc&lt;/p&gt;
-&lt;p&gt;2020.05.记不清了 被miaohongxuan发现，合作从此开始&lt;/p&gt;
-&lt;p&gt;2020.06.06 和wangyilin发生事情&lt;/p&gt;
-&lt;p&gt;沉睡……&lt;/p&gt;
-&lt;p&gt;2020.07.11 找到了刘老师 todoumon&lt;/p&gt;
-&lt;p&gt;2020.记不清了 当了几天miaohongxuan OJ的管理&lt;/p&gt;
-&lt;p&gt;2020.10.02 参加dashisai&lt;/p&gt;
-&lt;p&gt;2020.10.03 学会啵啵挂号&lt;/p&gt;
-&lt;p&gt;2020.10.07 找到WangZerun&lt;/p&gt;
-&lt;p&gt;2020.10.12 绿名祭&lt;/p&gt;
-&lt;p&gt;2020.10.23 学分190祭&lt;/p&gt;
-&lt;p&gt;2020.10.30 粉丝90祭&lt;/p&gt;
-&lt;p&gt;2021.1.3 粉丝100祭&lt;/p&gt;
-&lt;p&gt;2021.2.1 粉丝110祭&lt;/p&gt;
-">关于</a>
-      </div>
-      
-      <div class="item">
-        <a class="result-title" style="opacity: 0;" href="https://Kangth9039.github.io/post/p1001/"" data-c="
-          &lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include &amp;lt;iostream&amp;gt;
-using namespace std;
-int main(){
-    int a, b;
-    cin &amp;gt;&amp;gt; a &amp;gt;&amp;gt; b; // input
-    cout &amp;lt;&amp;lt; a + b &amp;lt;&amp;lt; endl; // output
-    return 0;
-} // DONE!
-&lt;/code&gt;&lt;/pre&gt;
-">P1001</a>
-      </div>
-      
-    </div>
-    <div class="page">
-      <div id="page_ul"></div>
-    </div>
-  </div>
-</div>
-<script>
-  !function () {
-    let searchMask = document.querySelector('#search_mask');
-    let result = document.querySelector('#result');
-    let items = document.querySelectorAll('.item');
-    let searchBox = document.querySelector('#search');
-    let statCount = document.querySelector('#stat_count');
-    let statTimes = document.querySelector('#stat_times');
-    let pageUl = document.querySelector('#page_ul');
-    let close = document.querySelector('#close');
-    
-    close.addEventListener('click', function() {
-      searchMask.style = 'display: none;'
-    })
 
-    let finds = [];
-    let contents = [];
-    let pageSize = 10;
-    items.forEach(item => {
-      let a = item.querySelector('a');
-      contents.push({
-        title: a.innerText,
-        details: a.dataset.c,
-        link: a.href
-      })
-      item.remove();
-    })
+//动作
+function draw() {
+    ctx.clearRect(0, 0, 450, 450);
+    //画布局
+    //      for(var i = 0; i < 30; i++){
+    //          ctx.strokeStyle = "#ccc";//线条颜色
+    //          ctx.beginPath();
+    //          ctx.moveTo(0,i*w);
+    //          ctx.lineTo(450,i*w);
 
-    function insertStr(soure, start, count) {
-      let newStr = soure.substr(start, count);
-      return soure.slice(0, start) + '<em>' + newStr + '</em>' + soure.slice(start + count);
-    }
-
-    pageUl.addEventListener('click', function(event) {
-      let target = event.target;
-      if (target.__proto__ === HTMLSpanElement.prototype) {
-        appendResults(parseInt(target.dataset.i));
-      }
-    })
-
-    function appendResults(index) {
-      let htmlResult = '';
-      let start = index || 0;
-      let end = Math.min(start + pageSize, finds.length);
-      for (let i = start; i < end; i++) {
-        const current = finds[i];
-        let html = current.title;
-        let sum = 0;
-        let positions = current.positions;
-        positions.forEach(position => {
-          html = insertStr(html, position.start + sum, position.count);
-          sum += 9;
-        })
-        htmlResult += `<div class="item"><a class="result-title" href="${current.link}">${html}</a></div>`;
-      }
-      result.innerHTML = htmlResult;
-      pageUl.innerHTML = '';
-      let count = finds.length / pageSize;
-      let lis = '';
-      if (start !== 0) {
-        lis += `<span class="fa fa-angle-left" data-i='${start - 1}'></span>`;
-      }
-      for (let i = 0; i < count; i++) {
-        lis += `<span class='${i === start?'current':''}' data-i='${i}'>${i+1}</span>`;     
-      }
-      if (start+1 < count) {
-        lis += `<span class="fa fa-angle-right" data-i='${start+1}'></span>`;  
-      }
-      pageUl.innerHTML = lis;
-    }
-
-    function search(delay) {
-      let timer = null
-      return function () {
-        clearTimeout(timer)
-        timer = setTimeout(() => {
-          let start = Date.now();
-          let segments = searchBox.value.split(' ').filter(c => c != '');
-          if (segments.length <= 0) {
-            return;
-          }
-          finds = [];
-          let htmlResult = '';
-          contents.forEach(content => {
-            let title = content.title;
-            let positions = [];
-            let find = false;
-            segments.forEach((segment) => {
-              if (content.title.includes(segment)) {
-                find = true;
-                positions.push({
-                  start: content.title.indexOf(segment),
-                  count: segment.length
-                })
-              } else if (content.details.includes(segment)) {
-                find = true;
-              }
-            });
-            if (find) {
-              finds.push({
-                title: content.title,
-                link: content.link,
-                positions
-              });
-            }
-          })
-          appendResults(0);
-          statCount.textContent = finds.length;
-          statTimes.textContent = Date.now() - start;
-        }, delay)
-      }
-    }
-    searchBox.addEventListener('input', search(200));
-  }()
-</script>
-
-<input hidden id="copy" />
-<script>
-  !function () {
-    let times = document.querySelectorAll('.publish-time');
-    for (let i = 0; i < times.length; i++) {
-      let date = times[i].dataset.t;
-      let time = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
-      if (time < 60) {
-        str = time + '秒之前';
-      } else if (time < 3600) {
-        str = Math.floor(time / 60) + '分钟之前';
-      } else if (time >= 3600 && time < 86400) {
-        str = Math.floor(time / 3600) + '小时之前';
-      } else if (time >= 86400 && time < 259200) {
-        str = Math.floor(time / 86400) + '天之前';
-      } else {
-        str = times[i].textContent;
-      }
-      times[i].textContent = str;
-    }
-  }();
-</script>
-
-<script>
-  let language = '';
-  if (language !== '') {
-    let map = new Map();
-    if (language === 'en') {
-      map.set('search', 'Search');
-      map.set('category', 'Categories');
-      map.set('article', 'Articles');
-      map.set('tag', 'Tags');
-      map.set('top', 'Top');
-      map.set('publish', 'published');
-      map.set('minute', ' minutes');
-      map.set('read-more', 'Read More');
-      map.set('view', 'View');
-      map.set('words', ' words');
-      map.set('category-in', 'category in');
-      map.set('preview', 'Meta');
-      map.set('index', 'Toc');
-      map.set('no-archives', "You haven't created yet");
-      map.set('archives', " articles in total");
-      map.set('cloud-tags', " tags in total");
-      map.set('copyright', "Copyright: ");
-      map.set('author', "Author: ");
-      map.set('link', "Link: ");
-      map.set('leave-message', "Leave a message");
-      map.set('format', "Links Format");
-      map.set('site-name', "Name: ");
-      map.set('site-link', "Link: ");
-      map.set('site-desc', "Desc: ");
-      map.set('stat', " related results, taking ");
-      map.set('stat-time', " ms");
-      map.set('site-img', "Image: ");
-    }
-
-    if (map.size > 0) {
-      let lanElems = document.querySelectorAll('.language');
-      lanElems.forEach(elem => {
-        let lan = elem.dataset.lan, text = map.get(lan);
-        if (elem.__proto__ === HTMLInputElement.prototype) {
-          elem.placeholder = text
-        } else {
-          if (elem.dataset.count) {
-            text = elem.dataset.count + text;
-          }
-          elem.textContent = text;
+    //          ctx.moveTo(i*w,0);
+    //          ctx.lineTo(i*w,450);
+    //          ctx.closePath();
+    //          ctx.stroke();
+    //      }
+    //画蛇身
+    for (var j = 0; j < snake.length; j++) {
+        ctx.fillStyle = "green";
+        if (j == snake.length - 1) {
+            ctx.fillStyle = "red";
         }
-      })
+        ctx.beginPath();
+        ctx.rect(snake[j].x * w, snake[j].y * w, w, w);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
     }
-  }
-  //拿来主义(真香)^_^，Clipboard 实现摘自掘金 https://juejin.im/post/5aefeb6e6fb9a07aa43c20af
-  window.Clipboard = (function (window, document, navigator) {
-    var textArea,
-      copy;
+    //出现食物
+    drawFood();
+    //吃到食物
+    if (head.x == food.x && head.y == food.y) {
+        initFood();
+        food = new Food(foodx, foody);
+        //重新出现食物
+        drawFood();
 
-    // 判断是不是ios端
-    function isOS() {
-      return navigator.userAgent.match(/ipad|iphone/i);
+        //增加蛇的长度  有些小瑕疵，蛇身增长时应该是身体增长，而不是在蛇头上增长
+        var newCell = new cell(head.x, head.y, head.d);
+        switch (head.d) {
+            case 40:
+                newCell.y++;
+                break; //下
+            case 39:
+                newCell.x++;
+                break; //右
+            case 38:
+                newCell.y--;
+                break; //上
+            case 37:
+                newCell.x--;
+                break; //左
+        }
+        snake[snake.length] = newCell;
+        head = newCell;
+        //head = 
     }
-    //创建文本元素
-    function createTextArea(text) {
-      textArea = document.createElement('textArea');
-      textArea.value = text;
-      textArea.style.width = 0;
-      textArea.style.height = 0;
-      textArea.clientHeight = 0;
-      textArea.clientWidth = 0;
-      document.body.appendChild(textArea);
+}
+//随机初始化食物
+function initFood() {
+    foodx = Math.ceil(Math.random() * 28 + 1);
+    foody = Math.ceil(Math.random() * 28 + 1);
+    for (var i = 0; i < snake.length; i++) {
+        if (snake[i].x == foodx && snake[i].y == foody) {
+            initFood();
+        }
     }
-    //选择内容
-    function selectText() {
-      var range,
-        selection;
-
-      if (isOS()) {
-        range = document.createRange();
-        range.selectNodeContents(textArea);
-        selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
-        textArea.setSelectionRange(0, 999999);
-      } else {
-        textArea.select();
-      }
+}
+//画食物
+function drawFood() {
+    //绘制食物
+    ctx.fillStyle = "orange";
+    ctx.beginPath();
+    ctx.rect(food.x * w, food.y * w, w, w);
+    ctx.closePath();
+    ctx.fill();
+}
+draw();
+//监听键盘事件
+document.onkeydown = function(e) {
+    //下40 ， 右边39，左边37，上38  键盘事件
+    var keyCode = e.keyCode;
+    if (head.d - keyCode != 2 && head.d - keyCode != -2 && keyCode >= 37 && keyCode <= 40) {
+        moveSnake(keyCode);
     }
-
-    //复制到剪贴板
-    function copyToClipboard() {
-      try {
-        document.execCommand("Copy")
-      } catch (err) {
-        alert("复制错误！请手动复制！")
-      }
-      document.body.removeChild(textArea);
+}
+//控制蛇移动方向
+function moveSnake(keyCode) {
+    var newSnake = [];
+    var newCell = new cell(head.x, head.y, head.d); //头
+    //身体
+    for (var i = 1; i < snake.length; i++) {
+        newSnake[i - 1] = snake[i];
     }
-
-    copy = function (text) {
-      createTextArea(text);
-      selectText();
-      copyToClipboard();
-    };
-
-    return {
-      copy: copy
-    };
-  })(window, document, navigator);
-
-  function copyCode(e) {
-    if (e.srcElement.tagName === 'SPAN' && e.srcElement.classList.contains('copy-code')) {
-      let code = e.currentTarget.querySelector('code');
-      var text = code.innerText;
-      if (e.srcElement.textContent === '复制成功') {
-        return;
-      }
-      e.srcElement.textContent = '复制成功';
-      (function (elem) {
-        setTimeout(() => {
-          if (elem.textContent === '复制成功') {
-            elem.textContent = '复制代码'
-          }
-        }, 1000);
-      })(e.srcElement)
-      Clipboard.copy(text);
+    newSnake[snake.length - 1] = newCell;
+    newCell.d = keyCode;
+    switch (keyCode) {
+        case 40:
+            newCell.y++;
+            break; //下
+        case 39:
+            newCell.x++;
+            break; //右
+        case 38:
+            newCell.y--;
+            break; //上
+        case 37:
+            newCell.x--;
+            break; //左
     }
-  }
-
-  let pres = document.querySelectorAll('pre');
-  pres.forEach(pre => {
-    let code = pre.querySelector('code');
-    let copyElem = document.createElement('span');
-    copyElem.classList.add('copy-code');
-    copyElem.textContent = '复制代码';
-    pre.appendChild(copyElem);
-    pre.onclick = copyCode
-  })
+    snake = newSnake;
+    head = snake[snake.length - 1];
+    checkDeath();
+    draw();
+}
+//游戏规则
+function checkDeath() {
+    //超出边框
+    if (head.x >= 30 || head.y >= 30 || head.x < 0 || head.y < 0) {
+        alert("Game over!");
+        window.location.reload();
+    }
+    //咬到自己
+    for (var i = 0; i < snake.length - 1; i++) {
+        if (head.x == snake[i].x && head.y == snake[i].y) {
+            alert("Game over!");
+            window.location.reload();
+        }
+    }
+}
+//蛇自动走
+function moveClock() {
+    moveSnake(head.d);
+}
+var isMove = false;
+function beginGame() {
+    !isMove && setInterval(moveClock, 300);
+    isMove = true;
+}
 
 </script>
-<script src="/media/js/motion.js"></script>
 
-<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-<script>
-  var scroll = new SmoothScroll('a[href*="#"]', {
-    speed: 200
-  });
-</script>
-
-
-<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas>
-<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
-<script type="text/javascript" src="/media/js/mouse/fireworks.js"></script>
-
-
-<script src="/media/js/cool.js"></script>
-
-
-
-  <div class="snow-container"></div>
-  <script src="/media/js/bg/snow.js"></script>
-
-
+</body>
 </html>
