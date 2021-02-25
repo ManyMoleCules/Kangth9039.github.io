@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Kangth9039.github.io</id>
     <title>HhF的博客小站</title>
-    <updated>2021-02-25T00:43:37.148Z</updated>
+    <updated>2021-02-25T00:54:14.711Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Kangth9039.github.io"/>
     <link rel="self" href="https://Kangth9039.github.io/atom.xml"/>
@@ -117,6 +117,7 @@ int main(){
         <content type="html"><![CDATA[<blockquote>
 <p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
 </blockquote>
+<p>注：小游戏加载较慢，在等待的时候不要点“确定”鸭QwQ</p>
 <h2 id="关于本站">🏠 关于本站</h2>
 <p>这是HhF03在2021年2月21日建的站，专门发各种code</p>
 <h2 id="博主是谁">👨‍💻 博主是谁</h2>
