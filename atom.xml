@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Kangth9039.github.io</id>
     <title>HhF的小站——Guomei Radio文章官方发布平台</title>
-    <updated>2021-04-17T01:11:41.396Z</updated>
+    <updated>2021-04-17T01:17:43.704Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Kangth9039.github.io"/>
     <link rel="self" href="https://Kangth9039.github.io/atom.xml"/>
@@ -10,4 +10,23 @@
     <logo>https://Kangth9039.github.io/images/avatar.png</logo>
     <icon>https://Kangth9039.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, HhF的小站——Guomei Radio文章官方发布平台</rights>
+    <entry>
+        <title type="html"><![CDATA[关于]]></title>
+        <id>https://Kangth9039.github.io/post/guan-yu-ben-zhan/</id>
+        <link href="https://Kangth9039.github.io/post/guan-yu-ben-zhan/">
+        </link>
+        <updated>2021-04-17T01:12:55.000Z</updated>
+        <content type="html"><![CDATA[<p>这是Guomei Radio（国美之声）的官方文章发布平台，你能看见这段话，说明你的英语水平是一流哒~</p>
+<h1 id="我如何发布文章">我如何发布文章？</h1>
+<ol>
+<li>去3层3年级办公室（楼梯右侧）找Aaron老师，把稿放他桌子上</li>
+<li>将稿件发给Lyttlekang@hotmail.com</li>
+</ol>
+<h1 id="发布后会怎样">发布后会怎样？</h1>
+<ol>
+<li>每周六周日上午，我们将筛选文章，选中的文章将发在本站上（当然有你的名字，昵称也可以），并且可以向Aaron老师要学分哦~</li>
+</ol>
+<h2 id="加油吖ง-_ง">加油吖(ง •_•)ง😀</h2>
+]]></content>
+    </entry>
 </feed>
